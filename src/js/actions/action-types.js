@@ -1,0 +1,5 @@
+export const actionTypes = {
+    LOAD_COMMENTS: "LOAD_COMMENTS",
+    DELETE_COMMENTS: "DELETE_COMMENTS",
+    UPDATE_COMMENTS: "UPDATE_COMMENTS"
+  };
