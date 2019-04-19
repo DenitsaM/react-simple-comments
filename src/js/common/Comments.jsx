@@ -20,9 +20,9 @@ class Comments extends Component {
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
-            isUpdate: true,
+            isUpdate: nextProps.isUpdate,
             comments: nextProps.comments
-        }); 
+        });    
     }
 
     handleChange({ target }) {
@@ -50,11 +50,11 @@ class Comments extends Component {
             comments: '',
             isUpdate: false,
         });
+        this.props.updatecallback(false);
       }
 
     render() {
         const { comments, isUpdate} = this.state;
-       
         if(isUpdate){
             return (
                 <section className="add-comments-container">

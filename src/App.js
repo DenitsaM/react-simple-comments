@@ -3,12 +3,10 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import logo from './logo.svg';
 import './styles/App.scss';
 import './styles/style.scss';
 import CommentsView from './js/Views/CommentsView';
 import commentsReducer from './js/reducers/comments-reducer';
-import DisplayCommentsView from './js/Views/DisplayCommentsView';
 
 const AppState = {
   comments: commentsReducer

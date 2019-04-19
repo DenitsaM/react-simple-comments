@@ -7,21 +7,36 @@ class CommentsView extends Component {
     super(props);
     this.state = {
       comments: "",
-      id: ""
+      id: "",
+      isUpdate: ''
     };
     this.updateCommentsValue = this.updateCommentsValue.bind(this);
+    this.removeComments = this.removeComments.bind(this);
+    this.updateEdit = this.updateEdit.bind(this);
   }
   updateCommentsValue(comments, id){
     this.setState({
       comments : comments,
-      id: id
+      id: id,
+      isUpdate: true
+    });
+  }
+  removeComments(isUpdate){
+    this.setState({
+      isUpdate : isUpdate,
+      comments: ''
+    });
+  }
+  updateEdit(isUpdate){
+    this.setState({
+      isUpdate : isUpdate,
     });
   }
   render() {
    return (
     <div>
-      <Comments comments={this.state.comments} id={this.state.id}/>  
-      <DisplayComments callback={this.updateCommentsValue}/>
+      <Comments comments={this.state.comments} id={this.state.id} isUpdate={this.state.isUpdate} updatecallback={this.updateEdit}/>  
+      <DisplayComments callback={this.updateCommentsValue} callbackremove={this.removeComments} edit={this.state.isUpdate}/>
     </div>
    )
   }

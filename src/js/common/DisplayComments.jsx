@@ -6,22 +6,29 @@ class DisplayCommentsView extends Component {
   constructor(props) {
     super(props);
     this.removeComments = this.removeComments.bind(this);
-    this.updateComments = this.updateComments.bind(this);
     this.updateCommentsValue = this.updateCommentsValue.bind(this);
-    
+    this.state = {
+        isUpdate: false,
+        clicked:''
+    };
   }
-
+  componentWillReceiveProps(nextProps) {
+      this.setState({
+        isUpdate: nextProps.edit
+      });  
+  }
   removeComments(e){
     const value =  e.currentTarget.getAttribute('comment');
     this.props.removeCommentsAction(value);
+    const isUpdate = false;
+    this.props.callbackremove(isUpdate);
   }
-  updateComments(e){
-    this.props.updateCommentsAction(this.props.comments);
-  }
+
   updateCommentsValue(e){
     const value =  e.currentTarget.getAttribute('comment');
     const id =  e.currentTarget.getAttribute('data-id');
     this.props.callback(value, id);
+    this.setState({ isUpdate: true, clicked: id });
   }
   render() {
     const commentsData = [].concat(this.props.comments).reverse();
@@ -33,7 +40,7 @@ class DisplayCommentsView extends Component {
                   <div key={i} className="comments-wrap">
                       <span>{result}</span>
                       <div className="edit-container">
-                          <span className="icon-pencil" onClick={this.updateCommentsValue} comment={result} data-id={i}></span>
+                          <span className={"icon-pencil" + (this.state.isUpdate && this.state.clicked == i? ' disable' : '')} onClick={this.updateCommentsValue} comment={result} data-id={i}></span>
                           <span className="icon-cross" onClick={this.removeComments} comment={result}></span>
                       </div>
                   </div>
